@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django_injector",
+    "third_party",
     "rest_framework",
     "booking_app",
     "oauth",
@@ -210,3 +212,8 @@ LOGGING = {
         },
     },
 }
+
+# Inject các module vào Django
+DJANGO_INJECTOR_MODULES = [
+    "third_party.di.PaymentModule",
+]

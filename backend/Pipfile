@@ -14,7 +14,6 @@ worker = "celery -A worker worker -l info"
 import_seed = "python manage.py import_seed"
 
 [packages]
-django = "*"
 psycopg = "*"
 djangorestframework = "*"
 celery = "*"
@@ -22,6 +21,10 @@ botocore = "*"
 boto3 = "*"
 pycurl = "*"
 django-redis = "*"
+django-injector = "*"
+injector = "*"
+isort = "*"
+black = "*"
 
 [dev-packages]
 

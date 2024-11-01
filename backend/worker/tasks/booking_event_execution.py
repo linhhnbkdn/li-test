@@ -1,6 +1,8 @@
 import json
 
-from booking_app.models import BookingModel
+from django.db import transaction
+
+from booking_app.models import BookingModel, SlotModel
 from worker.base_task import CeleryTaskABC
 from worker.config import app
 
@@ -11,4 +13,7 @@ from worker.config import app
     name="execute_booking_creating_event",
 )
 def execute_booking_creating_event(self, data: json) -> None:
-    BookingModel.objects.create(**data)
+    with transaction.atomic():
+        slot_id = data["slot_id"]
+        SlotModel.objects.get(id=slot_id).update(is_booked=True)
+        BookingModel.objects.create(**data)
