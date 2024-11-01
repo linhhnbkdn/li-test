@@ -17,7 +17,6 @@ start = "./scripts/start.sh"
 [packages]
 psycopg = "*"
 djangorestframework = "*"
-celery = "*"
 botocore = "*"
 boto3 = "*"
 pycurl = "*"
@@ -26,6 +25,7 @@ django-injector = "*"
 injector = "*"
 isort = "*"
 black = "*"
+celery = "*"
 
 [dev-packages]
 

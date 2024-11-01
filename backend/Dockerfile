@@ -40,5 +40,5 @@ ENV PIPENV_VENV_IN_PROJECT=1
 
 FROM base AS production
 COPY . .
-RUN pipenv run init -v
-ENTRYPOINT ["pipenv", "run", "start"]
+RUN pipenv run init
+# ENTRYPOINT ["pipenv", "run", "start"]

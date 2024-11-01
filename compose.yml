@@ -42,8 +42,19 @@ services:
       - 5432:5432
   backend:
     image: backend:production
+    command: ["pipenv", "run", "start"]
     ports:
       - 4011:4011
+    environment:
+      PIPENV_DOTENV_LOCATION: /app/prod.env
+      PIPENV_VENV_IN_PROJECT: 1
+    depends_on:
+      - db
+    networks:
+      - lf-network
+  worker:
+    image: backend:production
+    command: ["pipenv", "run", "worker"]
     environment:
       PIPENV_DOTENV_LOCATION: /app/prod.env
       PIPENV_VENV_IN_PROJECT: 1
