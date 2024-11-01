@@ -8,3 +8,9 @@ down:
 
 build:
 	cd ./backend && docker build  --target production -t backend:production .
+
+remove:
+	docker rmi backend:production
+
+start: build up
+clean: down remove
