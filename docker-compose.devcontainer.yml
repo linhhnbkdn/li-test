@@ -1,0 +1,73 @@
+version: "3.7"
+services:
+  localstack:
+    image: localstack/localstack:latest
+    environment:
+      AWS_DEFAULT_REGION: ap-northeast-1
+      DEBUG: false
+      DOCKER_HOST: unix:///var/run/docker.sock
+      HOSTNAME_EXTERNAL: localstack
+      SERVICES: sqs,sns
+      DISABLE_CORS_HEADERS: 1
+      DISABLE_CORS_CHECKS: 1
+    healthcheck:
+      test:
+        - CMD
+        - "curl"
+        - "http://localhost:4516/_localstack/health"
+        - "grep"
+        - '"initScripts": "initialized"'
+      interval: 2s
+      start_period: 20s
+      retries: 10
+      timeout: 10s
+    networks:
+      - locofy-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./backend/scripts/localstack.sh:/docker-entrypoint-initaws.d/localstack.sh
+  db:
+    image: postgres
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=example
+      - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    command: ["postgres", "-c", "wal_level=logical"]
+    networks:
+      - locofy-network
+    ports:
+      - 5432:5432
+  backend:
+    build:
+      context: ./backend
+      target: development
+      args:
+        USER_ID: 1100
+        GROUP_ID: 1100
+    ports:
+      - 4011:4011
+    tty: true
+    environment:
+      PIPENV_DOTENV_LOCATION: /app/backend/.container.env
+      PIPENV_VENV_IN_PROJECT: 1
+    volumes:
+      - ./:/app
+    depends_on:
+      - db
+    networks:
+      - locofy-network
+  redis:
+    image: redis:7.0
+    networks:
+      - locofy-network
+
+volumes:
+  venv:
+networks:
+  locofy-network:

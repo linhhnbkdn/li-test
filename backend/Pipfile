@@ -1,0 +1,26 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[scripts]
+init_dev = "pipenv install --dev"
+init = "pipenv install"
+server = "python manage.py runserver 0.0.0.0:4011"
+shell = "python manage.py shell"
+migration = "python manage.py makemigrations"
+migrate = "python manage.py migrate"
+worker = "celery -A worker worker -l info"
+import_seed = "python manage.py import_seed"
+
+[packages]
+django = "*"
+psycopg = "*"
+djangorestframework = "*"
+celery = "*"
+botocore = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.12"

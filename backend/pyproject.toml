@@ -1,0 +1,16 @@
+# black
+
+[tool.black]
+exclude = '''
+(
+  /(
+      \.eggs
+    | \.git
+    | \.mypy_cache
+    | \.pytest_cache
+    | \.venv
+    | __pychache__
+    | migrations
+  )/
+)
+'''
