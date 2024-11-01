@@ -41,6 +41,12 @@ router.register(
     basename="booking",
 )
 
+router.register(
+    r"payment",
+    views_booking.PaymentViewSet,
+    basename="payment",
+)
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include(router.urls)),

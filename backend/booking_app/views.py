@@ -50,9 +50,8 @@ class PaymentViewSet(GenericViewSet, mixins.CreateModelMixin):
     serializer_class = PaymentSerializer
 
     @inject
-    def __init__(self, payment_gateway: PaymentGateway, **kwargs: Any) -> None:
+    def setup(self, request, payment_gateway: PaymentGateway, **kwargs) -> None:
         self.payment_gateway = payment_gateway
-        super().__init__(**kwargs)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -61,6 +60,7 @@ class PaymentViewSet(GenericViewSet, mixins.CreateModelMixin):
             serializer.validated_data["amount"],
             "usb",
         )
+        self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response(
             serializer.data, status=status.HTTP_201_CREATED, headers=headers

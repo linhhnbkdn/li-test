@@ -54,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    # "django_injector.inject_request_middleware",
 ]
 
 ROOT_URLCONF = "backend.urls"
@@ -210,10 +211,15 @@ LOGGING = {
             "level": "INFO",
             "propagate": True,
         },
+        "third_party": {
+            "handlers": ["console", "mail_admins"],
+            "level": "INFO",
+            "propagate": True,
+        },
     },
 }
 
 # Inject các module vào Django
-DJANGO_INJECTOR_MODULES = [
+INJECTOR_MODULES = [
     "third_party.di.PaymentModule",
 ]
