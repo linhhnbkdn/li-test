@@ -1,7 +1,10 @@
 include .env
 
 up:
-	docker-compose --env-file .env -f compose.yml -p $(PROJECT_NAME) up -d
+	docker-compose -f compose.yml -p $(PROJECT_NAME) up --force-recreate -d
 
 down:
-	docker-compose --env-file .env -f compose.yml -p $(PROJECT_NAME) down
+	docker-compose -f compose.yml -p $(PROJECT_NAME) down
+
+build:
+	cd ./backend && docker build  --target production -t backend:production .

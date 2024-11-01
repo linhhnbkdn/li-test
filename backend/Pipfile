@@ -12,6 +12,7 @@ migration = "python manage.py makemigrations"
 migrate = "python manage.py migrate"
 worker = "celery -A worker worker -l info"
 import_seed = "python manage.py import_seed"
+start = "./scripts/start.sh"
 
 [packages]
 psycopg = "*"

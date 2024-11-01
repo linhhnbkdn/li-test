@@ -36,6 +36,9 @@ EXPOSE 4011
 
 FROM base AS development
 RUN apt-get install git -y
-# COPY Pipfile Pipfile.lock ./
 ENV PIPENV_VENV_IN_PROJECT=1
-# ENTRYPOINT [ "pipenv", "run", "server" ]
+
+FROM base AS production
+COPY . .
+RUN pipenv run init -v
+ENTRYPOINT ["pipenv", "run", "start"]
