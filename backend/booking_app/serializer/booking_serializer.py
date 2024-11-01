@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 def validate_slot_id(value):
-    if not SlotModel.objects.filter(id=value, is_booked=True).exists():
+    if SlotModel.objects.filter(id=value, is_booked=True).exists():
         raise serializers.ValidationError("Slot does not exist or is not booked")
 
 class BookingSerializer(BaseSerializer):

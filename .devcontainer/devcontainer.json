@@ -1,0 +1,41 @@
+{
+  "name": "li",
+  "dockerComposeFile": ["../docker-compose.devcontainer.yml"],
+  "service": "backend",
+  "workspaceFolder": "/app",
+  "customizations": {
+    "vscode": {
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "terminal.integrated.profiles.linux": {
+          "bash": {
+            "path": "/bin/bash"
+          }
+        }
+      },
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-python.python",
+        "streetsidesoftware.code-spell-checker",
+        "ms-vsliveshare.vsliveshare",
+        "Arjun.swagger-viewer",
+        "redhat.vscode-yaml",
+        "njpwerner.autodocstring",
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+        "Gruntfuggly.todo-tree",
+        "batisteo.vscode-django",
+        "firsttris.vscode-jest-runner",
+        "ms-azuretools.vscode-docker",
+        "zxh404.vscode-proto3",
+        "hediet.vscode-drawio",
+        "ms-python.isort",
+        "rioj7.command-variable",
+        "EditorConfig.EditorConfig",
+        "formulahendry.terminal"
+      ]
+    }
+  },
+  "shutdownAction": "none"
+}

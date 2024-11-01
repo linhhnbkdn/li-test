@@ -19,6 +19,9 @@ psycopg = "*"
 djangorestframework = "*"
 celery = "*"
 botocore = "*"
+boto3 = "*"
+pycurl = "*"
+django-redis = "*"
 
 [dev-packages]
 

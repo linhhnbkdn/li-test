@@ -11,4 +11,4 @@ from worker.config import app
     name="execute_booking_creating_event",
 )
 def execute_booking_creating_event(self, data: json) -> None:
-    BookingModel.objects.create_booking(**data)
+    BookingModel.objects.create(**data)
